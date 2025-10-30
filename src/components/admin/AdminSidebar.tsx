@@ -27,7 +27,7 @@ export default function AdminSidebar() {
   const [isSystemOpen, setIsSystemOpen] = useState(false)
 
   const navItems = [
-    { name: 'Dashboard', href: '/admin', icon: <LayoutDashboard size={18} /> },
+    { name: 'Dashboard', href: '/', icon: <LayoutDashboard size={18} /> },
     { name: 'Bookings', href: '/bookings', icon: <Utensils size={18} /> },
     { name: 'Enquiries', href: '/enquiries', icon: <MessageSquare size={18} /> },
     { name: 'Reviews', href: '/reviews', icon: <Star size={18} /> },
