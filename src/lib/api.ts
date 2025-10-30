@@ -653,8 +653,13 @@ export const galleryAPI = {
     apiRequest('/gallery/featured'),
   
   // Admin functions
-  upload: (imageData: FormData) =>
-    apiRequest('/gallery/upload', {
+  uploadSingle: (imageData: FormData) =>
+    apiRequest('/gallery/upload/single', {
+      method: 'POST',
+      body: imageData,
+    }),
+  uploadMultiple: (imageData: FormData) =>
+    apiRequest('/gallery/upload/multiple', {
       method: 'POST',
       body: imageData,
     }),

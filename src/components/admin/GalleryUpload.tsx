@@ -177,8 +177,8 @@ export default function GalleryUpload({ isOpen, onClose, onUploadComplete }: Gal
       formData.append('altText', file.altText);
       formData.append('isFeatured', file.isFeatured.toString());
 
-      const response = await galleryAPI.upload(formData);
-      
+      const response = await galleryAPI.uploadSingle(formData);
+
       if (response.success) {
         updateFile(file.id, { status: 'success' });
       } else {
@@ -190,51 +190,30 @@ export default function GalleryUpload({ isOpen, onClose, onUploadComplete }: Gal
   };
 
   const uploadMultipleFiles = async () => {
-    
     const formData = new FormData();
-    
     files.forEach((file, index) => {
       formData.append('images', file.file);
       formData.append(`title_${index}`, file.title);
       formData.append(`description_${index}`, file.description);
       formData.append(`altText_${index}`, file.altText);
     });
-
-    // Ensure category is set, fallback to 'Hair' if undefined
     const category = bulkSettings.category || 'Hair';
-    
-    // Validate category before sending
     const validCategories = ['Hair', 'Skin', 'Nail', 'Body'];
     const finalCategory = validCategories.includes(category) ? category : 'Hair';
-    
     formData.append('category', finalCategory);
     formData.append('subcategory', bulkSettings.subcategory || '');
     formData.append('tags', bulkSettings.tags || '');
     formData.append('isFeatured', bulkSettings.isFeatured.toString());
-    
-    // Log all form data entries
-
-    // Update all files to uploading status
-    files.forEach(file => {
-      updateFile(file.id, { status: 'uploading' });
-    });
-
+    files.forEach(file => { updateFile(file.id, { status: 'uploading' }); });
     try {
-      const response = await galleryAPI.upload(formData);
-      
+      const response = await galleryAPI.uploadMultiple(formData);
       if (response.success) {
-        files.forEach(file => {
-          updateFile(file.id, { status: 'success' });
-        });
+        files.forEach(file => { updateFile(file.id, { status: 'success' }); });
       } else {
-        files.forEach(file => {
-          updateFile(file.id, { status: 'error', error: response.message });
-        });
+        files.forEach(file => { updateFile(file.id, { status: 'error', error: response.message }); });
       }
     } catch (error: any) {
-      files.forEach(file => {
-        updateFile(file.id, { status: 'error', error: error.message });
-      });
+      files.forEach(file => { updateFile(file.id, { status: 'error', error: error.message }); });
     }
   };
 

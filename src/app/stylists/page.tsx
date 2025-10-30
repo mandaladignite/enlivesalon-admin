@@ -81,11 +81,13 @@ export default function StylistsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    // Relax client-side validation to allow flexible data entry
+    const sanitizedPhone = formData.phone.replace(/[\s\-]/g, '')
     try {
       const formDataToSend = new FormData()
       
       // Append all form data
-      Object.entries(formData).forEach(([key, value]) => {
+      Object.entries({ ...formData, phone: sanitizedPhone }).forEach(([key, value]) => {
         if (key === 'specialties' || key === 'workingDays') {
           // Send arrays as individual entries
           if (Array.isArray(value)) {
@@ -100,7 +102,7 @@ export default function StylistsPage() {
             formDataToSend.append('workingHours.end', (value as { start: string; end: string }).end)
           }
         } else {
-          formDataToSend.append(key, value.toString())
+          formDataToSend.append(key, typeof value === 'string' ? value.trim() : value.toString())
         }
       })
       

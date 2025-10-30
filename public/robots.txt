@@ -1,12 +1,8 @@
-# *
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /auth/
 Disallow: /api/
+Disallow: /_next/
+Disallow: /auth/admin/
 
-# Host
-Host: http://localhost:8001
-
-# Sitemaps
-Sitemap: http://localhost:8001/sitemap.xml
+# Sitemap
+Sitemap: https://admin.enlivesalon.com/sitemap.xml
