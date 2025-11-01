@@ -19,6 +19,7 @@ import {
   MessageSquare,
   Package,
   Star,
+  Gift,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -34,6 +35,7 @@ export default function AdminSidebar() {
     { name: 'Stylists', href: '/stylists', icon: <Scissors size={18} /> },
     { name: 'Services', href: '/services', icon: <Sparkles size={18} /> },
     { name: 'Gallery', href: '/gallery', icon: <ImageIcon size={18} /> },
+    { name: 'Offers', href: '/offers', icon: <Gift size={18} /> },
     { name: 'Memberships', href: '/memberships', icon: <BarChart2 size={18} /> },
   ]
 

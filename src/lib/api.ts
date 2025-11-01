@@ -715,6 +715,62 @@ export const galleryAPI = {
     apiRequest('/gallery/admin/dashboard/stats'),
 };
 
+// Offer APIs
+export const offerAPI = {
+  getAll: (params?: any) => {
+    const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
+    return apiRequest(`/offers${queryString}`);
+  },
+  
+  getById: (id: string) =>
+    apiRequest(`/offers/${id}`),
+  
+  getByCode: (code: string) =>
+    apiRequest(`/offers/code/${code}`),
+  
+  // Admin functions
+  create: (offerData: FormData | any) => {
+    const isFormData = offerData instanceof FormData;
+    return apiRequest('/offers', {
+      method: 'POST',
+      body: isFormData ? offerData : JSON.stringify(offerData),
+      headers: isFormData ? {} : { 'Content-Type': 'application/json' },
+    });
+  },
+  
+  update: (id: string, offerData: FormData | any) => {
+    const isFormData = offerData instanceof FormData;
+    return apiRequest(`/offers/${id}`, {
+      method: 'PUT',
+      body: isFormData ? offerData : JSON.stringify(offerData),
+      headers: isFormData ? {} : { 'Content-Type': 'application/json' },
+    });
+  },
+  
+  delete: (id: string) =>
+    apiRequest(`/offers/${id}`, { method: 'DELETE' }),
+  
+  deactivate: (id: string) =>
+    apiRequest(`/offers/${id}/deactivate`, { method: 'PATCH' }),
+  
+  reactivate: (id: string) =>
+    apiRequest(`/offers/${id}/reactivate`, { method: 'PATCH' }),
+  
+  getStats: () =>
+    apiRequest('/offers/admin/stats'),
+  
+  getAllAdmin: (params?: any) => {
+    const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
+    return apiRequest(`/offers/admin/all${queryString}`);
+  },
+  
+  getByIdAdmin: (id: string) =>
+    apiRequest(`/offers/${id}`),
+  
+  incrementUsage: (id: string) =>
+    apiRequest(`/offers/${id}/increment-usage`, { method: 'PATCH' }),
+};
+
 // Admin APIs
 export const adminAPI = {
   

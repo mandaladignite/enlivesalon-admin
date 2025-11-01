@@ -16,7 +16,8 @@ import {
   Image as ImageIcon,
   Scissors,
   Sparkles,
-  MessageSquare
+  MessageSquare,
+  Gift
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -34,6 +35,7 @@ export default function MobileSidebar() {
     { name: 'Stylists', href: '/admin/stylists', icon: <Scissors size={18} /> },
     { name: 'Services', href: '/admin/services', icon: <Sparkles size={18} /> },
     { name: 'Gallery', href: '/admin/gallery', icon: <ImageIcon size={18} /> },
+    { name: 'Offers', href: '/offers', icon: <Gift size={18} /> },
     { name: 'Memberships', href: '/admin/memberships', icon: <BarChart2 size={18} /> },
     { name: 'Contacts', href: '/admin/contacts', icon: <BarChart2 size={18} /> },
   ]
