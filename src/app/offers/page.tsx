@@ -100,12 +100,18 @@ export default function OffersPage() {
   const fetchServices = async () => {
     try {
       setLoadingServices(true)
-      const response = await serviceAPI.getAll({ isActive: true, limit: 200 })
+      setError('')
+      // Use getAllAdmin to get all services including inactive ones, or use getAll for public endpoint
+      const response = await serviceAPI.getAllAdmin({ isActive: true, limit: 200 })
       if (response.success) {
         setServices(response.data?.services || [])
+      } else {
+        setError('Failed to fetch services')
+        console.error('Services API error:', response)
       }
     } catch (err) {
       console.error('Error fetching services:', err)
+      setError('Error fetching services: ' + (err instanceof Error ? err.message : 'Unknown error'))
     } finally {
       setLoadingServices(false)
     }
@@ -802,8 +808,12 @@ export default function OffersPage() {
                   <div className="border border-gray-300 rounded-md p-3 max-h-60 overflow-y-auto">
                     {loadingServices ? (
                       <div className="text-center py-4 text-sm text-gray-500">Loading services...</div>
+                    ) : services.length === 0 ? (
+                      <div className="text-center py-4 text-sm text-gray-500">
+                        {error ? `Error: ${error}` : 'No services available'}
+                      </div>
                     ) : filteredServices.length === 0 ? (
-                      <div className="text-center py-4 text-sm text-gray-500">No services found</div>
+                      <div className="text-center py-4 text-sm text-gray-500">No services match your search</div>
                     ) : (
                       <div className="space-y-2">
                         {filteredServices.map((service) => (
