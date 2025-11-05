@@ -771,6 +771,50 @@ export const offerAPI = {
     apiRequest(`/offers/${id}/increment-usage`, { method: 'PATCH' }),
 };
 
+// Hero APIs
+export const heroAPI = {
+  getAll: (params?: any) => {
+    const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
+    return apiRequest(`/hero${queryString}`);
+  },
+  
+  getById: (id: string) =>
+    apiRequest(`/hero/${id}`),
+  
+  // Admin functions
+  create: (heroData: FormData | any) => {
+    const isFormData = heroData instanceof FormData;
+    return apiRequest('/hero', {
+      method: 'POST',
+      body: isFormData ? heroData : JSON.stringify(heroData),
+      headers: isFormData ? {} : { 'Content-Type': 'application/json' },
+    });
+  },
+  
+  update: (id: string, heroData: FormData | any) => {
+    const isFormData = heroData instanceof FormData;
+    return apiRequest(`/hero/${id}`, {
+      method: 'PUT',
+      body: isFormData ? heroData : JSON.stringify(heroData),
+      headers: isFormData ? {} : { 'Content-Type': 'application/json' },
+    });
+  },
+  
+  delete: (id: string) =>
+    apiRequest(`/hero/${id}`, { method: 'DELETE' }),
+  
+  deactivate: (id: string) =>
+    apiRequest(`/hero/${id}/deactivate`, { method: 'PATCH' }),
+  
+  reactivate: (id: string) =>
+    apiRequest(`/hero/${id}/reactivate`, { method: 'PATCH' }),
+  
+  getAllAdmin: (params?: any) => {
+    const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
+    return apiRequest(`/hero/admin/all${queryString}`);
+  },
+};
+
 // Admin APIs
 export const adminAPI = {
   

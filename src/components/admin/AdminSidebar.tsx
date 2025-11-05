@@ -20,6 +20,7 @@ import {
   Package,
   Star,
   Gift,
+  Layout,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -29,6 +30,7 @@ export default function AdminSidebar() {
 
   const navItems = [
     { name: 'Dashboard', href: '/', icon: <LayoutDashboard size={18} /> },
+    { name: 'Hero Sections', href: '/hero', icon: <Layout size={18} /> },
     { name: 'Bookings', href: '/bookings', icon: <Utensils size={18} /> },
     { name: 'Enquiries', href: '/enquiries', icon: <MessageSquare size={18} /> },
     { name: 'Reviews', href: '/reviews', icon: <Star size={18} /> },
