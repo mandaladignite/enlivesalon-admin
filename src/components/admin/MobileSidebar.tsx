@@ -17,7 +17,9 @@ import {
   Scissors,
   Sparkles,
   MessageSquare,
-  Gift
+  Gift,
+  Star,
+  Layout,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -29,15 +31,16 @@ export default function MobileSidebar() {
   const pathname = usePathname()
 
   const navItems = [
-    { name: 'Dashboard', href: '/admin', icon: <LayoutDashboard size={18} /> },
-    { name: 'Bookings', href: '/admin/bookings', icon: <Utensils size={18} /> },
-    { name: 'Enquiries', href: '/admin/enquiries', icon: <MessageSquare size={18} /> },
-    { name: 'Stylists', href: '/admin/stylists', icon: <Scissors size={18} /> },
-    { name: 'Services', href: '/admin/services', icon: <Sparkles size={18} /> },
-    { name: 'Gallery', href: '/admin/gallery', icon: <ImageIcon size={18} /> },
+    { name: 'Dashboard', href: '/', icon: <LayoutDashboard size={18} /> },
+    { name: 'Hero Sections', href: '/hero', icon: <Layout size={18} /> },
+    { name: 'Bookings', href: '/bookings', icon: <Utensils size={18} /> },
+    { name: 'Enquiries', href: '/enquiries', icon: <MessageSquare size={18} /> },
+    { name: 'Reviews', href: '/reviews', icon: <Star size={18} /> },
+    { name: 'Stylists', href: '/stylists', icon: <Scissors size={18} /> },
+    { name: 'Services', href: '/services', icon: <Sparkles size={18} /> },
+    { name: 'Gallery', href: '/gallery', icon: <ImageIcon size={18} /> },
     { name: 'Offers', href: '/offers', icon: <Gift size={18} /> },
-    { name: 'Memberships', href: '/admin/memberships', icon: <BarChart2 size={18} /> },
-    { name: 'Contacts', href: '/admin/contacts', icon: <BarChart2 size={18} /> },
+    { name: 'Memberships', href: '/memberships', icon: <BarChart2 size={18} /> },
   ]
 
   const systemItems = [
@@ -65,15 +68,15 @@ export default function MobileSidebar() {
           />
           
           {/* Sidebar */}
-          <div className="relative flex flex-col w-64 max-w-xs h-full bg-[#0E0E0E] shadow-xl">
+          <div className="relative flex flex-col w-64 max-w-xs h-full bg-[#ffffff] shadow-xl">
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-[#D4AF37]/20">
-              <h2 className="text-xl font-bold text-[#D4AF37] font-playfair">
-                Enlive Admin
-              </h2>
+              <div className="p-2">
+                <img src="logo.png" alt="" className='h-8' />
+              </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-300 hover:text-[#D4AF37]"
+                className="text-gray-600 hover:text-[#D4AF37]"
               >
                 <X size={24} />
               </button>
@@ -88,9 +91,9 @@ export default function MobileSidebar() {
                       href={item.href}
                       onClick={() => setIsOpen(false)}
                       className={`flex items-center p-3 rounded-lg text-sm font-medium transition-colors ${
-                        pathname === item.href 
-                          ? 'bg-[#D4AF37] text-black shadow-md'
-                          : 'text-gray-300 hover:bg-[#1A1A1A] hover:text-[#D4AF37]'
+                        pathname === item.href
+                          ? 'bg-[#D4AF37] text-white shadow-md'
+                          : 'text-black hover:bg-[#1A1A1A] hover:text-[#ffffff]'
                       }`}
                     >
                       <span className="mr-3">{item.icon}</span>
@@ -105,8 +108,8 @@ export default function MobileSidebar() {
                     onClick={() => setIsSystemOpen(!isSystemOpen)}
                     className={`flex items-center justify-between w-full p-3 rounded-lg text-sm font-medium transition-colors ${
                       pathname.startsWith('/admin/system')
-                        ? 'bg-[#1A1A1A] text-[#D4AF37]'
-                        : 'text-gray-300 hover:bg-[#1A1A1A] hover:text-[#D4AF37]'
+                        ? 'bg-[#1A1A1A] text-[#ffffff]'
+                        : 'text-black hover:bg-[#1A1A1A] hover:text-[#ffffff]'
                     }`}
                   >
                     <div className="flex items-center">
@@ -125,8 +128,8 @@ export default function MobileSidebar() {
                             onClick={() => setIsOpen(false)}
                             className={`flex items-center p-2 rounded-lg text-sm font-medium transition-colors ${
                               pathname === item.href
-                                ? 'bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/30'
-                                : 'text-gray-400 hover:bg-[#1A1A1A] hover:text-[#D4AF37]'
+                                ? 'bg-[#D4AF37] text-white shadow-md'
+                                : 'text-black hover:bg-[#1A1A1A] hover:text-[#ffffff]'
                             }`}
                           >
                             <span className="mr-3">{item.icon}</span>
